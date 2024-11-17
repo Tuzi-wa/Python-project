@@ -6,7 +6,7 @@ Requirements
 		tensorflow
 		matplotlib
 		mplfinance
-	 scikit-learn
+	        scikit-learn
   The project requires the following Python libraries:
 	•	yfinance: To fetch historical stock data.
 	•	numpy: For numerical operations.

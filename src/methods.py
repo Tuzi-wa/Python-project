@@ -54,13 +54,13 @@ def plot_candlestick(predictions, df, last_days=30):
         future_df['Volume'] = 0
     future_df = future_df.reindex(columns=df.columns, fill_value=0)
 
-    # 调试信息
+    
     print("Last days data (df):")
     print(df[-last_days:])
     print("Future predictions data (future_df):")
     print(future_df)
 
-    # 合并数据
+    
     try:
         full_df = pd.concat([df[-last_days:], future_df])
     except Exception as e:

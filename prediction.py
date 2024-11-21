@@ -84,12 +84,38 @@ def plot_candlestick(predictions, df, last_days=30):
     future_dates = pd.date_range(df.index[-1], periods=predictions.shape[0] + 1, freq='B')[1:]  
     future_df = pd.DataFrame(predictions, index=future_dates, columns=['Open', 'High', 'Low', 'Close'])
     full_df = pd.concat([df[-last_days:], future_df])  
+    full_df.index = pd.to_datetime(full_df.index)
+    if "Volume" not in df.columns:
+        df['Volume'] = 0
+    if "Volume" not in future_df.columns:
+        future_df['Volume'] = 0
+    future_df = future_df.reindex(columns=df.columns, fill_value=0)
+
+    
+    print("Last days data (df):")
+    print(df[-last_days:])
+    print("Future predictions data (future_df):")
+    print(future_df)
+
+    
+    try:
+        full_df = pd.concat([df[-last_days:], future_df])
+    except Exception as e:
+        print("Concat error:", e)
+        return
 
     mc = mpf.make_marketcolors(up='darkseagreen', down='darksalmon', edge='tan', wick='tan', volume='gray')
     s = mpf.make_mpf_style(marketcolors=mc)
 
-    
-    mpf.plot(full_df, type='candle', style=s, title='30-Day Stock Price Prediction with Historical Data', volume=True, mav=(3,6,9))
+    mpf.plot(
+        full_df,
+        type = 'candle',
+        style = mpf.make_mpf_style(),
+        title = '30-Day Stock Price Prediction with Historical Data',
+        mav = (3, 6, 9),
+        volume = True,
+        returnfig = True
+        )
 
 
 if __name__ == "__main__":

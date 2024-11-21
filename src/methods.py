@@ -80,7 +80,7 @@ def plot_candlestick(predictions, df, last_days=30):
         returnfig = True
         )
 
-   
+mpf.show()
         
     
    

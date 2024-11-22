@@ -67,7 +67,7 @@ def plot_candlestick(predictions, df, last_days=30):
         print("Concat error:", e)
         return
 
-    mc = mpf.make_marketcolors(up='darkseagreen', down='darksalmon', edge='tan', wick='tan', volume='gray')
+    mc = mpf.make_marketcolors(up='green', down='red', edge='white', wick='black', volume='gray')
     s = mpf.make_mpf_style(marketcolors=mc)
 
     mpf.plot(
